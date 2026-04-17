@@ -58,10 +58,6 @@ class ImmersiveActivity : AppSystemActivity() {
 
   override fun onSceneReady() {
     super.onSceneReady()
-    // Position the user when they launch into the app
-    scene.setViewOrigin(0.0f, 0.0f, -1.0f, 0.0f)
-    // Enable better panel rendering (default)
-    scene.enableHolePunching(true)
     // Set Mixed Reality passthrough mode
     scene.enablePassthrough(true)
     // Support re-centering the panels in front of the user

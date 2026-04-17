@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.samples.uisetsample.util.view.PatternScaffold
+import com.meta.spatial.samples.uisetsample.util.view.StatefulWrapper
 import com.meta.spatial.uiset.button.BorderlessCircleButton
 import com.meta.spatial.uiset.button.BorderlessIconButton
 import com.meta.spatial.uiset.button.SecondaryButton
@@ -177,11 +178,14 @@ fun HorizonPatternTwo() {
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        SpatialSearchBar(
-            modifier = Modifier.fillMaxWidth(.95f),
-            onQueryChange = {},
-            onQuerySubmit = {},
-        )
+        StatefulWrapper(initialValue = "") { query, onQueryChange ->
+          SpatialSearchBar(
+              modifier = Modifier.fillMaxWidth(.95f),
+              query = query,
+              onQueryChange = onQueryChange,
+              onQuerySubmit = {},
+          )
+        }
 
         SecondaryCircleButton(
             icon = { Icon(SpatialIcons.Regular.MoreHorizontal, "") },

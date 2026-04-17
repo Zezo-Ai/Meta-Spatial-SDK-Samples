@@ -119,9 +119,9 @@ entities:
             - 0
             - 0
           dimensions:
-            - 0.0399999991
-            - 0.0399999991
-            - 0.0399999991
+            - 0.2
+            - 0.2
+            - 0.2
           densityInternal: 50
           restitution: 0.01
           state: 1
@@ -238,9 +238,9 @@ entities:
           restitution: 0.01
           densityInternal: 50
           dimensions:
-            - 0.0399999991
-            - 0.0399999991
-            - 0.0399999991
+            - 0.2
+            - 0.2
+            - 0.2
           frictionInternal:
             - 0
             - 0
@@ -285,9 +285,9 @@ entities:
         com.meta.spatial.physics.Physics:
           restitution: 0.01
           dimensions:
-            - 0.0399999991
-            - 0.0399999991
-            - 0.0399999991
+            - 0.2
+            - 0.2
+            - 0.2
           frictionInternal:
             - 0
             - 0

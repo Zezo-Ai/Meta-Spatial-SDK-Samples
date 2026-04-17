@@ -101,7 +101,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
     componentManager.registerComponent<FollowerTarget>(FollowerTarget.Companion)
     componentManager.registerComponent<DroneComponent>(DroneComponent.Companion)
     systemManager.registerSystem(FollowerSystem())
-    systemManager.registerSystem(DroneSystem(droneSceneController))
+    systemManager.registerSystem(DroneSystem { droneSceneController })
     systemManager.registerSystem(ManageGLXFSceneObjectsSystem(this, waitForGLXFSceneObjects))
 
     loadGLXF { composition ->

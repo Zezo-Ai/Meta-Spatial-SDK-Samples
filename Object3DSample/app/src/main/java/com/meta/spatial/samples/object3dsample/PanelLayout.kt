@@ -136,7 +136,7 @@ fun ObjectLibraryScreen(
         ImageItem(
             drawableRes = R.drawable.bot,
             modifier = Modifier.weight(1f),
-            onClick = { setUpButton(robot, dimensions = Vector3(0.11f, 0.21f, 0.08f)) },
+            onClick = { setUpButton(robot, dimensions = Vector3(0.22f, 0.42f, 0.16f)) },
         )
         ImageItem(
             drawableRes = R.drawable.quad,
@@ -167,7 +167,7 @@ fun ObjectLibraryScreen(
         ImageItem(
             drawableRes = R.drawable.sculpture,
             modifier = Modifier.weight(1f),
-            onClick = { setUpButton(sculpture, dimensions = Vector3(0.23f, 0.17f, 0.17f)) },
+            onClick = { setUpButton(sculpture, dimensions = Vector3(0.46f, 0.34f, 0.34f)) },
         )
       }
     }

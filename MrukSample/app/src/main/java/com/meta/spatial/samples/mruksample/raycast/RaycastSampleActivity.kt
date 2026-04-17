@@ -260,7 +260,7 @@ class RaycastSampleActivity : AppSystemActivity() {
               // Get selection from spinner
               jsonFileSpinner.selectedItem?.let { item ->
                 val file = applicationContext.assets.open("${item}.json")
-                val text = file.bufferedReader().use { reader -> reader.readText() }
+                val text = file.bufferedReader().use { it.readText() }
                 mrukFeature.loadSceneFromJsonString(text)
               }
             }

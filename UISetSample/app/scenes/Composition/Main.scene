@@ -5,15 +5,7 @@ entities:
           {}
         com.meta.components.Scene:
           nodes:
-            - ref:ButtonsLayout
-            - ref:ControlsLayout
-            - ref:SlidersLayout
-            - ref:TooltipsLayout
-            - ref:DialogsLayout
-            - ref:HorizonOSPattern1
-            - ref:VideoPlayerPattern
-            - ref:CustomUIPattern31
-            - ref:Navigator
+            - ref:OffsetOrigin
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -24,7 +16,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 2
             - 1
@@ -37,12 +34,12 @@ entities:
           children:
             - ref:TextTileButtonsLayout
             - ref:ButtonShelvesLayout
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/1"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: ButtonsLayout
     - components:
         com.meta.components.Animatable:
@@ -52,7 +49,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 2
             - 1
@@ -62,12 +64,12 @@ entities:
             - 0.894941092
             - 0
           componentVersion: 1
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/2"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: SlidersLayout
     - components:
         com.meta.components.Animatable:
@@ -77,7 +79,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 2
             - 1.13999999
@@ -89,12 +96,12 @@ entities:
           componentVersion: 1
           children:
             - ref:DropdownLayout
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/3"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: ControlsLayout
     - components:
         com.meta.components.Animatable:
@@ -119,6 +126,8 @@ entities:
             - 0.00213861465
             - -0.5
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/4"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -147,6 +156,8 @@ entities:
             - 0
             - -0.300000012
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/8"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -160,7 +171,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 2
             - 1.17999995
@@ -172,12 +188,12 @@ entities:
           componentVersion: 1
           children:
             - ref:TextFieldsLayout
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/6"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: TooltipsLayout
     - components:
         com.meta.components.Animatable:
@@ -197,6 +213,8 @@ entities:
             - 0
             - 0
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/5"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -220,6 +238,8 @@ entities:
             - 0.00213861465
             - 0
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/10"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -233,7 +253,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 2
             - 1.79999995
@@ -243,12 +268,12 @@ entities:
             - -1.40771508
             - 0
           componentVersion: 1
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/11"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: DialogsLayout
     - components:
         com.meta.components.Animatable:
@@ -273,6 +298,8 @@ entities:
             - 0.00213861465
             - -0.449999988
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/22"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -301,6 +328,8 @@ entities:
             - 0
             - -0.449999988
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/21"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -314,7 +343,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 1.46000004
             - 0.949999988
@@ -327,12 +361,12 @@ entities:
           children:
             - ref:HorizonOSPattern2
             - ref:HorizonOSPattern3
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/20"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: HorizonOSPattern1
     - components:
         com.meta.components.Animatable:
@@ -342,7 +376,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 1.78999996
             - 1.17999995
@@ -352,12 +391,12 @@ entities:
             - 3.79520297
             - 0
           componentVersion: 1
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/23"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: VideoPlayerPattern
     - components:
         com.meta.components.Animatable:
@@ -377,6 +416,8 @@ entities:
             - 0.00145298243
             - -0.000360965729
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/25"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -405,6 +446,8 @@ entities:
             - 0.00213861465
             - -0.25
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/26"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -418,7 +461,12 @@ entities:
         com.meta.components.PointerNodeInverseComponent:
           {}
         com.meta.components.SceneNode:
-          rotation.format: Euler
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
           scale:
             - 1.02999997
             - 0.75999999
@@ -432,12 +480,12 @@ entities:
             - ref:CustomUIPattern2
             - ref:CustomUIPattern2x4
             - ref:CustomUIPattern3x3
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/24"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: CustomUIPattern31
     - components:
         com.meta.components.Animatable:
@@ -462,6 +510,8 @@ entities:
             - 0.00213861465
             - -0.300000012
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/27"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -490,6 +540,8 @@ entities:
             - 0
             - -0.150000006
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/101"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -518,6 +570,8 @@ entities:
             - -0.100000001
             - -0.150000006
           componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/102"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -532,11 +586,11 @@ entities:
           {}
         com.meta.components.SceneNode:
           rotation.data:
-            - 0.52359879
+            - 0.965925813
+            - 0.258819044
             - 0
             - 0
-            - 0
-          rotation.format: Euler
+          rotation.format: Quaternion
           scale:
             - 0.5
             - 0.449999988
@@ -549,6 +603,8 @@ entities:
           children:
             - ref:DemoVideo
             - ref:Themes
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
@@ -556,5 +612,36 @@ entities:
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Navigator
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: OffsetOrigin
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0
+            - 1
+          componentVersion: 1
+          children:
+            - ref:VideoPlayerPattern
+            - ref:CustomUIPattern31
+            - ref:HorizonOSPattern1
+            - ref:DialogsLayout
+            - ref:SlidersLayout
+            - ref:TooltipsLayout
+            - ref:ControlsLayout
+            - ref:ButtonsLayout
+            - ref:Navigator
+        com.meta.components.Visibility:
+          visible: true
+      tag: OffsetOrigin
 metadata:
-  version: 1.32
+  version: 1.35

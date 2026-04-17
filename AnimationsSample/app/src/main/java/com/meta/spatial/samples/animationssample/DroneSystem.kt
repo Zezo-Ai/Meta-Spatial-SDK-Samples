@@ -16,7 +16,7 @@ import com.meta.spatial.toolkit.Followable
 import com.meta.spatial.toolkit.Transform
 
 /** This system handles drone rotations */
-class DroneSystem(val droneSceneController: DroneSceneController?) : SystemBase() {
+class DroneSystem(val droneSceneControllerProvider: () -> DroneSceneController?) : SystemBase() {
 
   private var prevTime = System.currentTimeMillis()
   private val smoothTime = 1f / 60f
@@ -88,7 +88,7 @@ class DroneSystem(val droneSceneController: DroneSceneController?) : SystemBase(
       prevPositionMap.put(droneComponent, dronePose.t)
     }
 
-    droneSceneController?.tick()
+    droneSceneControllerProvider()?.tick()
   }
 
   private fun smoothOver(dt: Float, convergenceFraction: Float): Float {
