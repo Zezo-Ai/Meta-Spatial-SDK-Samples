@@ -280,16 +280,16 @@ class RaycastSampleActivity : AppSystemActivity() {
 
             // Set up the raycast type spinner
             val raycastTypeSpinner = rootView?.findViewById<Spinner>(R.id.raycast_type_spinner)
-            val context = rootView?.context
-            if (context != null) {
-              val adapter =
-                  ArrayAdapter.createFromResource(
+            rootView?.context?.let { context ->
+              ArrayAdapter.createFromResource(
                       context,
                       R.array.raycast_type_array,
                       android.R.layout.simple_spinner_item,
                   )
-              adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-              raycastTypeSpinner?.adapter = adapter
+                  .also { adapter ->
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    raycastTypeSpinner?.adapter = adapter
+                  }
             }
 
             // Get references to scene options container and radio buttons

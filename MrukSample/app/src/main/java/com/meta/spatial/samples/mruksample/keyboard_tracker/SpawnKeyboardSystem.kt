@@ -21,15 +21,18 @@ import com.meta.spatial.runtime.SceneMesh
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCreationSystem
 
+/**
+ * System responsible for spawning mesh components on tracked keyboard entities.
+ *
+ * This system monitors entities with TrackedKeyboard components and automatically creates
+ * passthrough cutout meshes for them. The mesh allows the physical keyboard to be visible through
+ * passthrough while in VR.
+ *
+ * @property mrukFeature The MRUK feature instance used for keyboard tracking
+ */
 class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
 
-  companion object {
-    private const val KEYBOARD_SCALE = 1.2f
-    private const val LOG_TAG = "MRUK SpawnKeyboardSystem"
-  }
-
   private var isInit = false
-  private val trackableMeshId = "mesh://trackable"
   private lateinit var ptCutoutMaterial: SceneMaterial
 
   override fun execute() {
@@ -42,11 +45,10 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
     Query.where { has(TrackedKeyboard.id) }
         .eval()
         .forEach { entity ->
-          val mesh = entity.tryGetComponent<Mesh>()
           // 2. Check if they have already the Mesh component
-          if (mesh == null) {
+          if (entity.tryGetComponent<Mesh>() == null) {
             // 3. If not, spawn it
-            entity.setComponent(Mesh(Uri.parse(trackableMeshId)))
+            entity.setComponent(Mesh(Uri.parse(TRACKABLE_MESH_ID)))
           }
         }
   }
@@ -63,7 +65,7 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
 
     // Create a mesh creator for creating a mesh for each tracked keyboard
     val meshManager = systemManager.findSystem<MeshCreationSystem>().meshManager
-    meshManager.meshCreators[trackableMeshId] = { entity ->
+    meshManager.meshCreators[TRACKABLE_MESH_ID] = { entity ->
       Log.i(LOG_TAG, "Create mesh in mesh creation system")
       val volume = entity.getComponent<MRUKVolume>()
       val volumeMin = volume.min * KEYBOARD_SCALE
@@ -78,5 +80,11 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
           ptCutoutMaterial,
       )
     }
+  }
+
+  companion object {
+    private const val KEYBOARD_SCALE = 1.2f
+    private const val LOG_TAG = "MRUK SpawnKeyboardSystem"
+    private const val TRACKABLE_MESH_ID = "mesh://trackable"
   }
 }

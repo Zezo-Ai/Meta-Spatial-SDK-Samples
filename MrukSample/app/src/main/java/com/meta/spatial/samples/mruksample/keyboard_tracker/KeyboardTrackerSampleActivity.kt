@@ -58,8 +58,6 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
 
   private var showUiPanel = false
 
-  private val panelId = 2
-
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
     return listOf(VRFeature(this), mrukFeature)
@@ -139,11 +137,11 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
 
     Entity.createPanelEntity(
-        panelId,
+        PANEL_ID,
         R.layout.ui_keyboard_tracker_menu,
         Transform(),
         Visible(showUiPanel),
@@ -163,9 +161,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
 
   @OptIn(SpatialSDKExperimentalAPI::class)
   private fun startTracker() {
-    mrukFeature.configureTrackers(setOf(Tracker.Keyboard)).whenComplete {
-        result: MRUKStartTrackerResult,
-        _ ->
+    mrukFeature.configureTrackers(setOf(Tracker.Keyboard)).whenComplete { result, _ ->
       if (result == MRUKStartTrackerResult.SUCCESS) {
         setKeyboardTrackerSettingText(true)
         updateStartStopTrackerButton(true)
@@ -178,7 +174,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
 
   override fun onRecenter(isUserInitiated: Boolean) {
     super.onRecenter(isUserInitiated)
-    recenterElementInView(getHmd(systemManager), Entity(panelId))
+    recenterElementInView(getHmd(systemManager), Entity(PANEL_ID))
   }
 
   private fun toggleUiPanelVisibility() {
@@ -187,7 +183,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
 
   private fun setUIPanelVisibility(visible: Boolean) {
     showUiPanel = visible
-    val panel = Entity(panelId)
+    val panel = Entity(PANEL_ID)
     panel.setComponent(Visible(showUiPanel))
     if (showUiPanel) {
       recenterElementInView(getHmd(systemManager), panel)
@@ -237,13 +233,14 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
             }
             updateStartStopTrackerButton(trackerRunning)
           }
-        }
+        },
     )
   }
 
   companion object {
-    const val TAG = "KeyboardTrackerSampleActivity"
-    const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
-    const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
+    private const val TAG = "KeyboardTrackerSampleActivity"
+    private const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
+    private const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
+    private const val PANEL_ID = 2
   }
 }

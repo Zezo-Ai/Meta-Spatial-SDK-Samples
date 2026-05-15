@@ -30,6 +30,12 @@ class MenuPlacementSystem : SystemBase() {
 
   override fun execute() {
     val head = getScene().getViewerPose()
+    updateTargetScales()
+    updateTransformFollowers(head)
+  }
+
+  /** Updates entities with TargetScale by interpolating their current scale toward the target. */
+  private fun updateTargetScales() {
     Query.where { has(TargetScale.id) }
         .eval()
         .forEach { entity ->
@@ -43,6 +49,13 @@ class MenuPlacementSystem : SystemBase() {
               )
           )
         }
+  }
+
+  /**
+   * Updates entities with TransformParentFollow by positioning them relative to their parent and
+   * rotating them to face the viewer when appropriate.
+   */
+  private fun updateTransformFollowers(head: Pose) {
     Query.where { has(TransformParentFollow.id) }
         .eval()
         .forEach { child ->

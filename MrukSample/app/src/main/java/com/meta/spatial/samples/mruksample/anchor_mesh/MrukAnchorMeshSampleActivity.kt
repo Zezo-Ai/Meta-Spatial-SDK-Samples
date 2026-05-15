@@ -376,7 +376,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     }
   }
 
-  // Helper method to check if external storage is writable
+  /** Checks if external storage is writable. */
   private fun isExternalStorageWritable(): Boolean =
       Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
 
@@ -517,53 +517,55 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
   }
 
   private fun registerRoomMeshCreator(meshManager: MeshManager) {
-    meshManager.meshCreators[ROOM_MESH_ID] = { entity ->
-      // Access the room face mesh component
-      val roomFaceComponent = entity.getComponent<RoomMeshFace>()
-      // Find the room mesh
-      val room = requireNotNull(mrukFeature.findRoom(roomFaceComponent.roomUuid))
-      val roomMesh = requireNotNull(room.roomMesh)
-      // Find the room face mesh
-      val roomFace = requireNotNull(roomMesh.faces.find { it.uuid == roomFaceComponent.uuid })
-      // Create the positions and index buffer for the mesh
-      val positions = FloatArray(roomFace.indices.size * 3)
-      val indices = IntArray(roomFace.indices.size)
-      roomFace.indices.forEachIndexed { i, index ->
-        positions[i * 3 + 0] = roomMesh.positions[index * 3 + 0]
-        positions[i * 3 + 1] = roomMesh.positions[index * 3 + 1]
-        positions[i * 3 + 2] = roomMesh.positions[index * 3 + 2]
-        indices[i] = i
-      }
-      // Create the normals buffer for the mesh
-      val normals = FloatArray(positions.size) { 0.0f }
-      // Create the colors buffer for the mesh
-      val color =
-          when (roomFace.label) {
-            MRUKLabel.FLOOR -> Color.valueOf(0.2f, 0.6f, 0.2f, 1.0f) // Green
-            MRUKLabel.CEILING -> Color.valueOf(0.8f, 0.8f, 0.8f, 1.0f) // White
-            MRUKLabel.WALL_FACE -> Color.valueOf(0.6f, 0.6f, 0.8f, 1.0f) // Blue
-            MRUKLabel.INVISIBLE_WALL_FACE -> Color.valueOf(0.8f, 0.3f, 0.8f, 1.0f) // Purple
-            MRUKLabel.INNER_WALL_FACE -> Color.valueOf(0.4f, 0.4f, 0.6f, 1.0f) // Dark Blue
-            MRUKLabel.WINDOW_FRAME -> Color.valueOf(0.7f, 0.9f, 1.0f, 1.0f) // Light Blue
-            MRUKLabel.DOOR_FRAME -> Color.valueOf(0.6f, 0.4f, 0.2f, 1.0f) // Brown
-            else -> Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)
-          }
-      val colors = IntArray(positions.size / 3) { color.toArgb() }
-      // Create the UV buffer for the mesh
-      val uvs = FloatArray(positions.size / 3 * 2)
+    meshManager.meshCreators[ROOM_MESH_ID] = ::createRoomMesh
+  }
 
-      // Create the mesh
-      SceneMesh.meshWithMaterials(
-          positions,
-          normals,
-          uvs,
-          colors,
-          indices,
-          intArrayOf(0, indices.size),
-          arrayOf(SceneMaterial(SceneTexture(Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)))),
-          false,
-      )
+  private fun createRoomMesh(entity: Entity): SceneMesh {
+    // Access the room face mesh component
+    val roomFaceComponent = entity.getComponent<RoomMeshFace>()
+    // Find the room mesh
+    val room = requireNotNull(mrukFeature.findRoom(roomFaceComponent.roomUuid))
+    val roomMesh = requireNotNull(room.roomMesh)
+    // Find the room face mesh
+    val roomFace = requireNotNull(roomMesh.faces.find { it.uuid == roomFaceComponent.uuid })
+    // Create the positions and index buffer for the mesh
+    val positions = FloatArray(roomFace.indices.size * 3)
+    val indices = IntArray(roomFace.indices.size)
+    roomFace.indices.forEachIndexed { i, index ->
+      positions[i * 3 + 0] = roomMesh.positions[index * 3 + 0]
+      positions[i * 3 + 1] = roomMesh.positions[index * 3 + 1]
+      positions[i * 3 + 2] = roomMesh.positions[index * 3 + 2]
+      indices[i] = i
     }
+    // Create the normals buffer for the mesh
+    val normals = FloatArray(positions.size) { 0.0f }
+    // Create the colors buffer for the mesh
+    val color =
+        when (roomFace.label) {
+          MRUKLabel.FLOOR -> Color.valueOf(0.2f, 0.6f, 0.2f, 1.0f) // Green
+          MRUKLabel.CEILING -> Color.valueOf(0.8f, 0.8f, 0.8f, 1.0f) // White
+          MRUKLabel.WALL_FACE -> Color.valueOf(0.6f, 0.6f, 0.8f, 1.0f) // Blue
+          MRUKLabel.INVISIBLE_WALL_FACE -> Color.valueOf(0.8f, 0.3f, 0.8f, 1.0f) // Purple
+          MRUKLabel.INNER_WALL_FACE -> Color.valueOf(0.4f, 0.4f, 0.6f, 1.0f) // Dark Blue
+          MRUKLabel.WINDOW_FRAME -> Color.valueOf(0.7f, 0.9f, 1.0f, 1.0f) // Light Blue
+          MRUKLabel.DOOR_FRAME -> Color.valueOf(0.6f, 0.4f, 0.2f, 1.0f) // Brown
+          else -> Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)
+        }
+    val colors = IntArray(positions.size / 3) { color.toArgb() }
+    // Create the UV buffer for the mesh
+    val uvs = FloatArray(positions.size / 3 * 2)
+
+    // Create the mesh
+    return SceneMesh.meshWithMaterials(
+        positions,
+        normals,
+        uvs,
+        colors,
+        indices,
+        intArrayOf(0, indices.size),
+        arrayOf(SceneMaterial(SceneTexture(Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)))),
+        false,
+    )
   }
 
   private fun getSelectedSceneModel(sceneModelSpinner: Spinner): SceneModel {

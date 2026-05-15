@@ -67,7 +67,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
     componentManager.registerComponent<TransformParentFollow>(TransformParentFollow)
     systemManager.registerSystem(MenuSpawner())
     systemManager.registerSystem(MenuPlacementSystem())
-    systemManager.registerSystem(UIPositionSystem(::setUIPanelVisibility))
+    systemManager.registerSystem(UIPositionSystem(::setUiPanelVisibility))
     systemManager.registerSystem(MrukInputSystem(::toggleUiPanelVisibility))
 
     if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
@@ -112,10 +112,10 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
    * user triggers the panel toggle.
    */
   fun toggleUiPanelVisibility() {
-    setUIPanelVisibility(!showUiPanel)
+    setUiPanelVisibility(!showUiPanel)
   }
 
-  private fun setUIPanelVisibility(visible: Boolean) {
+  private fun setUiPanelVisibility(visible: Boolean) {
     showUiPanel = visible
     val panel = Entity(panelId)
     panel.setComponent(Visible(showUiPanel))

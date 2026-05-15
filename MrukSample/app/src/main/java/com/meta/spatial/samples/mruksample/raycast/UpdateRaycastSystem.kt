@@ -115,15 +115,14 @@ class UpdateRaycastSystem(
             )
         if (hit != null) arrayOf(hit) else emptyArray()
       }
-      RaycastMode.ALL -> {
-        mrukFeature.raycastRoomAll(
-            currentRoom.anchor.uuid,
-            rightHandPose.t,
-            rightHandDirection,
-            maxDistance,
-            SurfaceType.PLANE_VOLUME,
-        )
-      }
+      RaycastMode.ALL ->
+          mrukFeature.raycastRoomAll(
+              currentRoom.anchor.uuid,
+              rightHandPose.t,
+              rightHandDirection,
+              maxDistance,
+              SurfaceType.PLANE_VOLUME,
+          )
       RaycastMode.GLOBAL_MESH -> {
         val hit =
             mrukFeature.raycastRoom(
@@ -135,9 +134,7 @@ class UpdateRaycastSystem(
             )
         if (hit != null) arrayOf(hit) else emptyArray()
       }
-      RaycastMode.DEPTH -> {
-        emptyArray()
-      }
+      RaycastMode.DEPTH -> emptyArray()
     }
   }
 

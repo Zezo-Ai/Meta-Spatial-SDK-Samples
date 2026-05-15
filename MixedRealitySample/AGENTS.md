@@ -38,32 +38,61 @@ https://developers.meta.com/horizon/llmstxt/documentation/spatial-sdk/llms.txt/
 Meta Spatial Editor is a spatial composition tool for Spatial SDK. Import, organize, and transform your assets into visual compositions and export them into Spatial SDK projects.
 
 ### mse-agent
-mse-agent is the Meta Spatial Editor command-line tool for creating and modifying 3D scenes programmatically. Run `mse-agent readme` for the full command reference.
+mse-agent is a command-line tool included with Meta Spatial Editor for creating and modifying 3D scenes programmatically. Run `mse-agent readme` for the full command reference.
 
-**mse-agent Location:**
+### Step 1: Install Meta Spatial Editor (if not already installed)
+
+Check if mse-agent exists at one of these paths:
  - Mac: `/Applications/Meta Spatial Editor.app/Contents/MacOS/mse-agent`
- - Windows: `C:\Program Files\Meta Spatial Editor\V*\Resources\mse-agent (use the latest version folder)`
- - Linux: `<package-root>/mse-agent` (mse-agent is located at the root of the downloaded package)
+ - Windows: `C:\Program Files\Meta Spatial Editor\V*\Resources\mse-agent` (use the latest version folder)
+ - Linux: `<package-root>/mse-agent` (`<package-root>` is wherever you extracted the downloaded package)
 
-**Before You Start**
- - Check Meta Spatial Editor is installed — verify the mse-agent path exists
- - If Meta Spatial Editor is not installed, download it from:
-   - Mac: https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-for-mac/
-   - Windows: https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-for-windows/
-   - Linux (headless CLI only): https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-cli-for-linux/
- - Launch Meta Spatial Editor with the project scene (Run below commands from the project root directory):
-   - **Important:** The editor is a long-running GUI process. You must launch it in the background so it does not block your current process. On Mac, open already returns immediately. On Windows, use start to spawn a separate process. On Linux, the Meta Spatial Editor runs in headless mode. Always wait a few seconds after launching before running mse-agent ping to confirm the editor is ready.
-   - Mac: `open -a "/Applications/Meta Spatial Editor.app" "app/scenes/Main.metaspatial"`
-   - Windows: `cmd /c start /B "" "C:\Program Files\Meta Spatial Editor\V*\MetaSpatialEditor.exe" "app/scenes/Main.metaspatial"`
-   - Linux: `<package-root>/MetaSpatialEditorCLI serve -p app/scenes/Main.metaspatial &>/dev/null &`
+If not found, download and install Meta Spatial Editor:
+ - Mac: https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-for-mac/
+ - Windows: https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-for-windows/
+ - Linux (headless CLI only): https://developers.meta.com/horizon/downloads/package/meta-spatial-editor-cli-for-linux/
+### 2. Launch the editor
 
- - Verify connection: `mse-agent ping`
- - Run `mse-agent readme` for the full command reference.
+You can launch the editor in one of two ways:
+
+#### Option A: GUI mode (Mac and Windows)
+
+Launch Meta Spatial Editor and open your project scene. This is the standard workflow for visual editing.
+
+- Mac: `open -a "/Applications/Meta Spatial Editor.app" "app/scenes/Main.metaspatial"`
+- Windows: `cmd /c start /B "" "C:\Program Files\Meta Spatial Editor\V*\MetaSpatialEditor.exe" "app/scenes/Main.metaspatial"`
+
+#### Option B: CLI batch mode (Mac, Windows, and Linux)
+
+You can run the editor in headless batch mode with no UI. This is useful when working in a terminal, running on a remote server, or on Linux where the GUI is not available. CLI batch mode is available starting from v16.
+
+Run the following command from your project root directory to start the editor in batch mode:
+
+| Platform | Command |
+|----------|---------|
+| Mac      | `/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI serve -p app/scenes/Main.metaspatial &` |
+| Windows  | `start /B "C:\Program Files\Meta Spatial Editor\V*\Resources\CLI.exe" serve -p app\scenes\Main.metaspatial` |
+| Linux    | `<package-root>/MetaSpatialEditorCLI serve -p app/scenes/Main.metaspatial &>/dev/null &` |
+
+> **Note:** The `serve` command starts the editor in headless mode, listening for commands from `mse-agent`. It is a long-running process — launch it in the background (as shown above) so it does not block your terminal.
+>
+> - On **Windows**, replace `V*` with the latest version folder (for example, `V16`).
+> - On **Linux**, `<package-root>` is the root of the downloaded package.
 
 ## Rules
 
-- **Use Meta Spatial Editor (mse-agent) when entities are static and primarily define scene composition or layout.** Scenes are visually inspectable in Spatial Editor, which makes review and iteration faster than runtime-only entity creation.
+**BEFORE writing any `Entity.create()` code for new scene objects, STOP and answer these questions:**
 
-- **Use Kotlin runtime entity creation when entities must be created dynamically.** Spatial Editor scenes are static — if entity creation depends on runtime data, variable counts, or entities that appear and disappear based on state, runtime code is the better fit since you cannot know what to author ahead of time.
+1. **Is this entity static?** (fixed position, no runtime data, no dynamic count)
+   - YES → **Use Meta Spatial Editor (mse-agent)** to add it to the `.metaspatial` scene file. Do NOT write Kotlin code.
+   - If mse-agent is not installed, **do NOT fall back to Kotlin code**. Instead, install the latest Meta Spatial Editor first. If installation is not possible, ask the user before proceeding with Kotlin code.
+   - NO → Use Kotlin runtime code in `onSceneReady()` or a System.
 
-- **Use a hybrid approach when a scene has both static and dynamic aspects.** Authoring the static entities in Spatial Editor keeps it visually inspectable and lets designers iterate on composition independently, while keeping runtime-driven content in Kotlin lets engineers focus on behavior and logic in code.
+2. **Does this project have a `.metaspatial` scene?**
+   - Check: `ls app/scenes/*.metaspatial`
+   - If yes, static entities belong there — not in Kotlin.
+
+3. **Is the task a mix of static and dynamic?**
+   - Author static parts in Meta Spatial Editor, dynamic parts in Kotlin.
+
+**Why this matters:** Scenes authored in Meta Spatial Editor are visually inspectable — designers and developers can review layout, adjust positions, and iterate without rebuilding the app. Hardcoding static entities in Kotlin buries spatial layout in code where it's invisible and harder to maintain.

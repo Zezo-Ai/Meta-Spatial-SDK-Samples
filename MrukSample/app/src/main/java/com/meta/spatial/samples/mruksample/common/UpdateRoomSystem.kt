@@ -27,7 +27,6 @@ class UpdateRoomSystem(
     private val mrukFeature: MRUKFeature,
     private val getRoomTextView: () -> TextView?,
 ) : SystemBase() {
-
   private var prevRoom: MRUKRoom? = null
   private var prevRoomCount = -1
 

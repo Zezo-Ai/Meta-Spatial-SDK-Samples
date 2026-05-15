@@ -93,7 +93,7 @@ dependencies {
   implementation("androidx.media3:media3-effect:1.4.1")
 
   // Extensions
-  implementation("com.meta.horizon.media:videoextensions:0.2.4")
+  implementation("com.meta.horizon.media:videoextensions:0.2.2")
 
   // Tween Engine
   implementation("com.dorkbox:TweenEngine:9.2")
