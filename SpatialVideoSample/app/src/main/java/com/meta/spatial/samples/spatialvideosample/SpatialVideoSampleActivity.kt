@@ -332,9 +332,9 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
             )
       }
       mrPanelPose = Entity(R.id.spatialized_video_panel).getComponent<Transform>().transform
+      createVideoPanel()
       setMrMode(scene.isSystemPassthroughEnabled())
       isFirstReadyDone = true
-      createVideoPanel()
     }
   }
 
@@ -596,7 +596,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   },
                   500,
               )
-              setScale(Vector3(VR_SCREEN_RATIO))
             }
 
     player.setVideoSurface(panelSceneObject.getSurface())
