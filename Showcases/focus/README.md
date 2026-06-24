@@ -1,5 +1,7 @@
 # Focus
 
+> **This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
+
 ![Focus Banner](./Documentation/Resources/focus_icon.png "Focus")
 
 Focus is a virtual and mixed reality Quest application that shows developers how to build a productivity app using Meta Spatial SDK.
@@ -11,9 +13,6 @@ In order to build these applications, it is critical to be able to create spatia
 Focus app demonstrates panel and object management, enabling the creation, reuse, and destruction of interactive elements within varied environments.
 
 Focus serves as a practical template for developers looking to create similar applications or integrate these features into their own XR projects.
-
-
-**This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
 
 ![Focus overview](./Documentation/Resources/general.gif)
 

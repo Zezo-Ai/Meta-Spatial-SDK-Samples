@@ -1,5 +1,7 @@
 # Geo Voyage
 
+> **This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
+
 ![Hero image](media/hero-image.png 'Hero image')
 
 # Project Overview

@@ -1,5 +1,7 @@
 # Meta Spatial Scanner
 
+> **This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
+
 ![Meta Spatial Scanner banner](documentation/media/banner.png "Meta Spatial Scanner banner")
 
 **Meta Spatial Scanner** is a mixed reality app designed to showcase some of the features of [Meta's Spatial SDK](https://developers.meta.com/horizon/develop/spatial-sdk/), and demonstrate to developers how to create immersive and engaging apps for the Meta Quest. This app also serves as a starter project which brands or agencies can build upon to showcase new technical capabilities that utilize the headset camera, such as for live streaming, live customer assistance for goods and services, or realtime on-device Computer Vision (CV) analysis of the user's surroundings.

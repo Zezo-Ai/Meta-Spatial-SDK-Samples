@@ -1,5 +1,7 @@
 # Media View: An Immersive Mixed Reality Media Viewer for Meta Quest
 
+> **This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
+
 Media View is a cutting-edge application designed for Meta Quest devices, transforming how you experience your media within a mixed reality environment.  Built using the powerful Meta Spatial SDK, Media View seamlessly blends your physical surroundings with your digital content, creating a truly immersive and interactive experience.
 
 ## Core Features
